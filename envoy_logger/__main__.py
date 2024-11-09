@@ -23,15 +23,18 @@ while tries<retries:
     # Loop forever so that if an exception occurs, logger will restart
     try:
         tries=tries+1;
+        logging.info("Attempt...{}".format(tries));
         if cfg.enphase_token == '':
             envoy_token = enphaseenergy.get_token(
                 cfg.enphase_email,
                 cfg.enphase_password,
                 cfg.envoy_serial
             )
-            tries=0;
         else:
+            logging.info("Skipping Authentication to use token...");
             envoy_token=cfg.enphase_token;
+            
+        tries=0;
         S = SamplingLoop(envoy_token, cfg)
 
         S.run()
