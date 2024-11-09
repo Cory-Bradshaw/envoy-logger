@@ -17,8 +17,10 @@ parser.add_argument("cfg_path")
 args = parser.parse_args()
 
 cfg = load_cfg(args.cfg_path)
-
-while True:
+retries = 3;
+tries = 0;
+while tries<retries:
+    tries=tries+1;
     # Loop forever so that if an exception occurs, logger will restart
     try:
         envoy_token = enphaseenergy.get_token(
@@ -26,7 +28,7 @@ while True:
             cfg.enphase_password,
             cfg.envoy_serial
         )
-
+        tries=0;
         S = SamplingLoop(envoy_token, cfg)
 
         S.run()
