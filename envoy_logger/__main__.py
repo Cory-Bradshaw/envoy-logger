@@ -20,9 +20,9 @@ cfg = load_cfg(args.cfg_path)
 retries = 3;
 tries = 0;
 while tries<retries:
-    tries=tries+1;
     # Loop forever so that if an exception occurs, logger will restart
     try:
+        tries=tries+1;
         envoy_token = enphaseenergy.get_token(
             cfg.enphase_email,
             cfg.enphase_password,
