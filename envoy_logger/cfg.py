@@ -12,7 +12,7 @@ class Config:
         try:
             self.enphase_email = data['enphaseenergy']['email'] # type: str
             self.enphase_password = data['enphaseenergy']['password'] # type: str
-
+            self.enphaseToken = data['enphaseenergy']['token']# type: str
             self.envoy_serial = str(data['envoy']['serial'])
             self.envoy_url = data['envoy'].get('url', 'https://envoy.local') # type: str
             self.source_tag = data['envoy'].get('tag', 'envoy') # type: str
