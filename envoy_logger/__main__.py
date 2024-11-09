@@ -23,12 +23,15 @@ while tries<retries:
     # Loop forever so that if an exception occurs, logger will restart
     try:
         tries=tries+1;
-        envoy_token = enphaseenergy.get_token(
-            cfg.enphase_email,
-            cfg.enphase_password,
-            cfg.envoy_serial
-        )
-        tries=0;
+        if cfg.enphase_token == '':
+            envoy_token = enphaseenergy.get_token(
+                cfg.enphase_email,
+                cfg.enphase_password,
+                cfg.envoy_serial
+            )
+            tries=0;
+        else:
+            envoy_token=cfg.enphase_token;
         S = SamplingLoop(envoy_token, cfg)
 
         S.run()
